@@ -113,3 +113,20 @@ const treeNodes: TreeNode[] = [
 ]
 
 export const result = getSubTreesByLeaves(['a-2', 'a-3', 'b-3'],treeNodes)
+
+// 通过 values 获取 label
+export function getLabelsFromTreeValues(values: string[], trees: TreeNode[]) {
+  const treeNodeQueue: TreeNode[] = [...trees]
+  const labels: string[] = []
+
+  while(treeNodeQueue.length > 0) {
+    const treeNode = treeNodeQueue.shift()
+    if (!treeNode) break
+    if (treeNode.children) {
+      treeNodeQueue.push(...treeNode.children)
+    }
+    if (values.includes(treeNode.value)) {
+      labels.push(treeNode.label)
+    }
+  }
+}
